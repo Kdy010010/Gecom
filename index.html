@@ -31,5 +31,29 @@
     <a href="https://github.com/Kdy010010/Gecom/issues" target="_blank">게시판 목록</a>
     
      <a href="https://github.com/Kdy010010/Gecom/issues/3" target="_blank">채팅</a>
+    <ul id="issuesList"></ul>
+
+    <script>
+        async function fetchGitHubIssues() {
+            const apiUrl = 'https://api.github.com/repos/Kdy010010/Gecom/issues';
+            
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                const issuesList = document.getElementById('issuesList');
+
+                data.forEach(issue => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = issue.title;
+                    issuesList.appendChild(listItem);
+                });
+            } catch (error) {
+                console.error('Error fetching GitHub issues:', error);
+            }
+        }
+
+        fetchGitHubIssues();
+    </script>
 </body>
 </html>
